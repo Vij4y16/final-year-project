@@ -11,7 +11,7 @@ class Auth extends CI_Controller{
 	}
 	
 	public function index(){
-		$data['title'] = 'Voting System-CI';
+		$data['title'] = 'Online Voting System';
 		$this->load->view('_template_login/login', $data);
 	}
 	function actlogin(){

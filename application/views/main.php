@@ -132,9 +132,10 @@
         })
         //logout
         $('.logout').on('click', function(e){
-          e.preventDefault()
+          e.preventDefault();
+          sessionStorage.setItem("mobilenoverified", 0);
+          sessionStorage.setItem("fingerverified", 0);
           window.location.assign('<?=base_url("user/logout")?>');
-          localStorage.setItem("verified", 0);
         })
       </script>
 

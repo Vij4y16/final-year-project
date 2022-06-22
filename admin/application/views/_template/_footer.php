@@ -20,8 +20,6 @@
 <script src="<?=base_url('./../assets/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?=base_url('./../assets/adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js');?>"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="<?=base_url('./../assets/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
 <!-- DataTables -->
 <script src="<?=base_url('./../assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js');?>"></script>
 <script src="<?=base_url('./../assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js');?>"></script>

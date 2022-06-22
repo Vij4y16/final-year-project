@@ -37,21 +37,26 @@
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-green layout-top-nav">
 <div class="wrapper">
-  <script>
-    const ss = localStorage.getItem("verified");
-    if (ss === "0" && window.location.pathname == '/voting-ci/') {
-      window.location.assign("http://localhost/voting-ci/mobileno_verification");
+<script>
+    let mobilenover = sessionStorage.getItem("mobilenoverified");
+    let fingerver = sessionStorage.getItem("fingerverified");
+
+    if (mobilenover === "0" && (window.location.pathname == '/voting-ci/' || window.location.pathname == '/voting-ci/fingerprint_verification')) {
+      window.location.assign("<?=base_url("mobileno_verification")?>");
     }
-    else if (ss === "1" && window.location.pathname == '/voting-ci/mobileno_verification') {
-      window.location.assign("http://localhost/voting-ci/");
+    else if (mobilenover === "1" && fingerver === "0" && (window.location.pathname == '/voting-ci/mobileno_verification' || window.location.pathname == '/voting-ci/')) {
+      window.location.assign("<?=base_url("fingerprint_verification")?>");
     }
-  </script>
-  <header class="main-header">
+    else if (mobilenover === "1" && fingerver === "1" && (window.location.pathname == '/voting-ci/mobileno_verification' || window.location.pathname == '/voting-ci/fingerprint_verification')) {
+      window.location.assign("<?=base_url("")?>");
+    }
+</script>
+<header class="main-header">
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
           <a href="" class="navbar-brand"><b>Voting-</b>System</a>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
         </div>
@@ -77,16 +82,16 @@
         </div> -->
         <!-- /.navbar-collapse -->
         <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
             <!-- User Account Menu -->
             <li class="dropdown">
               <!-- Menu Toggle Button -->
-              <a><span class="hidden-xs"><?=($this->session->login) ? $this->session->nama : 'Welcome' ?></span></a>
+              <a><?=($this->session->login) ? $this->session->nama : 'Welcome' ?></a>
             </li>
-            <li class="dropdown">
+            <li>
               <!-- Menu Toggle Button -->
-              <a><span class="hidden-xs logout" style="cursor: pointer;"><?=($this->session->login) ? 'Logout' : '' ?></span></a>
+              <a><span class="logout" style="cursor: pointer;"><?=($this->session->login) ? 'Logout' : '' ?></span></a>
             </li>
           </ul>
         </div>

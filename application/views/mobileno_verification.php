@@ -23,14 +23,13 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
 
 <script> 
-    var firebaseConfig = {
-		    apiKey: "AIzaSyBUmyjK3X1SqHBfvdLgAxRha7P97yw4fxM",
-			  apiKey: "AIzaSyDkFqy-b0mxCEZkA-FMqgmgddV-1r70jzE",
-			  authDomain: "online-voting-27.firebaseapp.com",
-			  projectId: "online-voting-27",
-			  storageBucket: "online-voting-27.appspot.com",
-			  messagingSenderId: "942586729363",
-			  appId: "1:942586729363:web:05bc530a3f7c9ea8824e66"
+    const firebaseConfig = {
+		  apiKey: "AIzaSyB_TG5wI55bTIshk3AR1dHgtR017GIQ0r4",
+		  authDomain: "online-voting-21.firebaseapp.com",
+		  projectId: "online-voting-21",
+		  storageBucket: "online-voting-21.appspot.com",
+		  messagingSenderId: "153470258997",
+		  appId: "1:153470258997:web:a34803eb698d77fa71467c"
 		};
 
 	firebase.initializeApp(firebaseConfig);
@@ -90,8 +89,8 @@
 		  const user = result.user;
 
 		  console.log(user);
-			localStorage.setItem("verified", 1);
-		  window.location.assign("http://localhost/voting-ci/");	
+			sessionStorage.setItem("mobilenoverified", 1);
+		  window.location.assign("http://localhost/voting-ci/");
 		}).catch((error) => {
 	  		alert("Entered OTP is incorrect, Please check the OTP!");
 		});
@@ -104,7 +103,8 @@
 <script>
 	$('.logout').on('click', function(e){
       e.preventDefault()
-      localStorage.setItem("verified", 0);
-      window.location.assign('http://localhost/voting-ci/user/logout');
+      sessionStorage.setItem("mobilenoverified", 0);
+      sessionStorage.setItem("fingerverified", 0);
+      window.location.assign('<?=base_url("user/logout")?>');
     })
 </script>

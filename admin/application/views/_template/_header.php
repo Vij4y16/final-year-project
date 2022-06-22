@@ -16,12 +16,8 @@
   <link rel="stylesheet" href="<?=base_url('./../assets/adminlte/bower_components/select2/dist/css/select2.min.css')?>">
   <!-- bootstrap datetime picker -->
   <link rel="stylesheet" href="<?=base_url('./../assets/css/bootstrap-datetimepicker.min.css')?>">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="<?=base_url('./../assets/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css');?>">
   <!-- Pace style -->
   <link rel="stylesheet" href="<?=base_url('./../assets/adminlte/plugins/pace/pace.min.css');?>">
-  <!-- Sweetalert -->
-  <link rel="stylesheet" href="<?=base_url('./../assets/css/sweetalert2.min.js');?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url('./../assets/adminlte/dist/css/AdminLTE.min.css');?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins

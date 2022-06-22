@@ -1,3 +1,4 @@
+	<script src="<?=base_url('assets/js/mfs100.js')?>"></script>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="box box-solid">
@@ -41,6 +42,13 @@
 							<label for="mobilenos">Mobile No :</label>
 							<input type="text" name="mobilenos" class="form-control" placeholder="Enter Mobile No">
 						</div>
+						<div class="form-group">
+							<label for="fingers">Finger Print :</label><br/>
+							<textarea class="form-control" id="fingers" name="fingers" rows="4" cols="50" readonly></textarea>
+						</div>
+						<div class="form-group">
+							<input type="button" name="fingerbtns" class="form-control" value="Add Finger Print" onclick="return Captures()">
+						</div>
 
 						<div class="form-group">
 							<small style="color:#a50909; text-decoration:underline;">Note: Username and Password will be the same by Default!</small>
@@ -63,7 +71,7 @@
 					<form id="editForm">
 						<input type="hidden" name="id_pemilih">
 						<div class="form-group">
-							<label for="Nama">Nama :</label>
+							<label for="Nama">Name :</label>
 							<input type="text" name="nama" class="form-control" placeholder="Enter Name">
 						</div>
 						<div class="form-group">
@@ -73,6 +81,13 @@
 						<div class="form-group">
 							<label for="mobileno">Mobile No :</label>
 							<input type="text" name="mobileno" class="form-control" placeholder="Enter Mobile No">
+						</div>
+						<div class="form-group">
+							<label for="finger">Finger Print :</label><br/>
+							<textarea class="form-control" id="finger" name="finger" rows="4" cols="50" readonly></textarea>
+						</div>
+						<div class="form-group">
+							<input type="button" name="fingerbtn" class="form-control" value="Change Finger Print" onclick="return Capture()">
 						</div>
 						<button class="btn btn-success btn-ubah btn-flat">Save</button>
 					</form>
@@ -166,6 +181,7 @@
 					$('[name="nama"]').val(data.nama);
 					$('[name="username"]').val(data.username);
 					$('[name="mobileno"]').val(zz);
+					$('[name="finger"]').val(data.fingerprint);
 				}
 			})
 			return false;
@@ -200,4 +216,79 @@
 				return false;
 			}
 		})
+
+
+
+		var quality = 60; //(1 to 100) (recommanded minimum 55)
+        var timeout = 10; // seconds (minimum=10(recommanded), maximum=60, unlimited=0 )
+		var nooffinger = '1';
+
+		var uri = "http://localhost:8004/mfs100/"
+	function Capture() {
+            try {
+             var res = CaptureFinger(quality, timeout);
+                if (res.httpStaus) {
+                    if (res.data.ErrorCode == "0") {
+                        document.getElementById('finger').value = res.data.IsoTemplate;
+                    }
+                }
+                else {
+                	Swal.fire('Failed', res.err, 'error');                
+                }
+            }
+            catch (e) {
+                Swal.fire('Failed', e.message, 'error'); 
+            }
+            return false;
+        }
+
+     function Captures() {
+            try {
+             var res = CaptureFinger(quality, timeout);
+                if (res.httpStaus) {
+                    if (res.data.ErrorCode == "0") {
+                        document.getElementById('fingers').value = res.data.IsoTemplate;
+                    }
+                }
+                else {
+                	Swal.fire('Failed', res.err, 'error');                
+                }
+            }
+            catch (e) {
+                Swal.fire('Failed', e.message, 'error'); 
+            }
+            return false;
+        }
+    function CaptureFinger(quality, timeout) {
+    var MFS100Request = {
+        "Quality": quality,
+        "TimeOut": timeout
+    };
+    var jsondata = JSON.stringify(MFS100Request);
+    return PostMFS100Client("capture", jsondata);
+	}
+
+	function PostMFS100Client(method, jsonData) {
+    var res;
+    $.support.cors = true;
+    var httpStaus = false;
+    $.ajax({
+        type: "POST",
+        async: false,
+        crossDomain: true,
+        url: uri + method,
+        contentType: "application/json; charset=utf-8",
+        data: jsonData,
+        dataType: "json",
+        processData: false,
+        success: function (data) {
+            httpStaus = true;
+            res = { httpStaus: httpStaus, data: data };
+        },
+        error: function (jqXHR, ajaxOptions, thrownError) {
+            res = { httpStaus: httpStaus, err: getHttpError(jqXHR) };
+        },
+    });
+    return res;
+}
 	</script>

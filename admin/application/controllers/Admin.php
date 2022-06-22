@@ -44,7 +44,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function index(){
-		$data['title'] = 'Voting System-CI';
+		$data['title'] = 'Online Voting System';
 
 		$this->header($data);
 		$this->load->view('main');
@@ -211,23 +211,25 @@ class Admin extends CI_Controller {
 	}
 	function get_pemilih($id){
 		// $d = $this->db->query('SELECT id_pemilih, nama, username FROM pemilih WHERE id_pemilih='.$id)->row();
-		$d = $this->db->select('id_pemilih, nama, username, mobileno')->get_where('pemilih', ['id_pemilih' => $id])->row();
+		$d = $this->db->select('id_pemilih, nama, username, mobileno, fingerprint')->get_where('pemilih', ['id_pemilih' => $id])->row();
 		echo json_encode($d);
 	}
 	function tambah_pemilih(){
 		$nama = $this->input->post('namas');
 		$username = $this->input->post('usernames');
 		$mobileno = $this->input->post('mobilenos');
+		$finger = $this->input->post('fingers');
 		$password = md5($this->input->post('usernames'));
-		$data = ['nama' => $nama, 'username' => $username, 'password' => $password, 'mobileno' => $mobileno];
+		$data = ['nama' => $nama, 'username' => $username, 'password' => $password, 'mobileno' => $mobileno, 'fingerprint' => $finger];
 		$this->m_admin->tambah('pemilih', $data);
 	}
 	function edit_pemilih($id){
 		$nama = $this->input->post('nama');
 		$username = $this->input->post('username');
 		$mobileno = $this->input->post('mobileno');
+		$finger = $this->input->post('finger');
 		$where = ['id_pemilih' => $id];
-		$data = ['nama' => $nama, 'username' => $username, 'mobileno' => $mobileno];
+		$data = ['nama' => $nama, 'username' => $username, 'mobileno' => $mobileno, 'fingerprint' => $finger];
 		$this->m_admin->ubah($where, 'pemilih', $data);
 	}
 	function reset_pass_pemilih($id){

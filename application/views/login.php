@@ -15,9 +15,14 @@
                     <label for="Password">Password :</label>
                     <input type="password" name="password" class="form-control" placeholder="Enter Password">
                   </div>
-                  <button onclick="loginhandler();" class="btn btn-success btn-flat btn-block"><i class="fa fa-sign-in"></i> Login</button>
+                  <button class="btn btn-success btn-flat btn-block"><i class="fa fa-sign-in"></i> Login</button>
                 </form>
               </div>
             </div>
           </div>
         </div>
+        
+        <script>
+          sessionStorage.setItem("mobilenoverified", 0);
+          sessionStorage.setItem("fingerverified", 0);
+        </script>

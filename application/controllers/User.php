@@ -38,7 +38,7 @@ class User extends CI_Controller {
 	}
 
 	public function index(){
-		$data['title'] = 'Voting System-CI';
+		$data['title'] = 'Online Voting System';
 		$data['voting'] = $this->db->get('voting')->row();
 
 		$cekvoting = $this->db->get('voting')->num_rows();
@@ -63,11 +63,23 @@ class User extends CI_Controller {
 	function mobileno_verification() {
 		$datas['title'] = 'Login';
 		$this->load->view('_template/_header', $datas);
-		$data = array('name' => 'Hello from User controller', 'id' => $this->session->id, 'sname' => $this->session->mobileno);
+		$data = array('id' => $this->session->id, 'sname' => $this->session->mobileno);
 		$this->load->view('mobileno_verification', $data);
 		$this->load->view('_template/_footer');
 	}
 
+	function fingerprint_verification() {
+		$datas['title'] = 'Login';
+		$this->load->view('_template/_header', $datas);
+		$bb = $this->db->query('SELECT fingerprint FROM pemilih WHERE id_pemilih='.$this->session->id)->row();
+		foreach($bb as $b) {
+		    $a = $b.' ';
+		}
+		$data = array('id' => $this->session->id, 'fing' => $a);
+		$this->load->view('fingerprint_verification', $data);
+		$this->load->view('_template/_footer');
+	}
+ 
 	function pilih($voting, $id){
 		$c = $this->db->get_where('voting', ['id_voting' => $voting]);
 		if ($c->num_rows() > 0) {
